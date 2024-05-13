@@ -33,74 +33,48 @@ To write a program to implement the the Logistic Regression Using Gradient Desce
 12.Predict placement status for a new student with given feature values (xnew).
 
 13.Print Results: Print the predictions and the actual values (Y) for comparison.
- 
-
 ## Program:
 ```
-/*
 Program to implement the the Logistic Regression Using Gradient Descent.
-Developed by: NARESH.P.S
-RegisterNumber:  2122223040127
-*/
+Developed by:NARESH.P.S
+RegisterNumber: 212223040127
 ```
 ```
-#import modules
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-dataset = pd.read_csv("C:/classes/ML/New folder/Placement_Data.csv")
+dataset=pd.read_csv("C:\sem-1\Placement_Data.csv")
 dataset
-
-#dropping the serial no and salary col
-dataset = dataset.drop('sl_no',axis=1)
-#dataset = dataset.drop('sl_no',axis=1)
-
-#catogorising col for further labegling
-dataset["gender"] = dataset["gender"].astype('category')
+dataset=dataset.drop('sl_no',axis=1)
+dataset=dataset.drop("salary",axis=1)
+dataset ["gender"] = dataset ["gender"].astype('category')
 dataset["ssc_b"] = dataset["ssc_b"].astype('category')
-dataset["hsc_b"] = dataset["hsc_b"].astype('category')
-dataset["degree_t"] = dataset["degree_t"].astype('category')
-dataset["workex"] = dataset["workex"].astype('category')
-dataset["specialisation"] = dataset["specialisation"].astype('category')
-dataset["status"] = dataset["status"].astype('category')
-dataset["hsc_s"] = dataset["hsc_s"].astype('category')
+dataset["hsc_b"] = dataset ["hsc_b"].astype('category')
+dataset ["degree_t"] = dataset ["degree_t"].astype('category')
+dataset ["workex"] = dataset ["workex"].astype('category')
+dataset["specialisation"] = dataset ["specialisation"].astype('category')
+dataset ["status"] = dataset["status"].astype('category')
+dataset ["hsc_s"] = dataset ["hsc_s"].astype('category')
 dataset.dtypes
-
-#labelling the colums
-dataset["gender"] = dataset["gender"].cat.codes
-dataset["ssc_b"] = dataset["ssc_b"].cat.codes
-dataset["hsc_b"] = dataset["hsc_b"].cat.codes
-dataset["degree_t"] = dataset["degree_t"].cat.codes
+dataset ["gender"] = dataset ["gender"].cat.codes
+dataset ["ssc_b"] = dataset["ssc_b"].cat.codes
+dataset ["hsc_b"] = dataset ["hsc_b"].cat.codes
+dataset ["degree_t"] = dataset["degree_t"].cat.codes
 dataset["workex"] = dataset["workex"].cat.codes
 dataset["specialisation"] = dataset["specialisation"].cat.codes
-dataset["status"] = dataset["status"].cat.codes
+dataset["status"] = dataset ["status"].cat.codes
 dataset["hsc_s"] = dataset["hsc_s"].cat.codes
-
-#display dataset
 dataset
-
-#selecting the features and labels
-X = dataset.iloc[:, :-1].values
-Y = dataset.iloc[:, -1].values
-
-#display dependent variables
+X=dataset.iloc[:, :-1].values
+Y=dataset.iloc[:, -1].values
 Y
-
-#initialize the model parameter
-theta = np.random.randn(X.shape[1])
+theta=np.random.randn(X.shape[1])
 y=Y
-
-#define the sigmoid function 
 def sigmoid(z):
-    return 1/(1+np.exp(-z))
-
-#define the loss function 
+    return 1 / (1+np.exp(-z))
 def loss(theta,X,y):
-    h = sigmoid(X.dot(theta))
-    return -np.sum(y * np.log(h) + (1-y) * np.log(1-h))
-
-#define the gradient descent algorithm
+    h=sigmoid(X.dot(theta))
+    return -np.sum(y * np.log(h) + (1 - y) * np.log(1 - h))
 def gradient_descent (theta, X, y, alpha, num_iterations):
     m = len(y)
     for i in range(num_iterations):
@@ -108,30 +82,21 @@ def gradient_descent (theta, X, y, alpha, num_iterations):
         gradient = X.T.dot(h-y) / m
         theta -= alpha * gradient
     return theta
-
-#train the model
 theta =  gradient_descent(theta, X, y, alpha=0.01, num_iterations=1000)
-
-# make the predictions
 def predict(theta, X): 
     h = sigmoid(X.dot(theta))
     y_pred = np.where(h >= 0.5, 1, 0)
     return y_pred
-
 y_pred = predict(theta, X)
-
-#evaluate the model
-accuracy = np.mean(y_pred.flatten() == y)
-print("Accuracy : ",accuracy)
+accuracy = np.mean(y_pred.flatten()==y)
+print("Accuracy:", accuracy)
 print(y_pred)
 print(Y)
-
-xnew = np.array([[0,87,0,95,0,2,78,2,0,0,1,0]])
-y_prednew = predict(theta,xnew)
+xnew = np.array([[0, 87, 0, 95, 0, 2, 78, 2, 0, 0, 1, 0]]) 
+y_prednew = predict(theta, xnew) 
 print(y_prednew)
-
-xnew = np.array([[0,0,0,0,0,2,8,2,0,0,1,0]])
-y_prednew = predict(theta,xnew)
+xnew = np.array([[0, 0, 0, 0, 0, 2, 8, 2, 0, 0, 1, 0]]) 
+y_prednew = predict(theta, xnew) 
 print(y_prednew)
 
 ```
@@ -167,11 +132,6 @@ y_prednew:
 
 ![image](https://github.com/23004513/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/138973069/20def8a9-c007-4bb9-94b1-e385f3accc37)
 
-y_prednew:
-
-![image](https://github.com/23004513/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/138973069/7d9ac4aa-54af-43d2-89f0-51ce992b72f4)
-
 
 ## Result:
 Thus the program to implement the the Logistic Regression Using Gradient Descent is written and verified using python programming.
-
